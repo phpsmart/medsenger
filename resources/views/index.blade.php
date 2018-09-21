@@ -33,12 +33,15 @@
 			
 			$http.get("/index").then(function (response) {
 					$scope.names = response.data.records;
-					console.log(response.data);
+					//console.log(response.data.records);
 			});
 			
 			$interval(function () {	
 				$http.get("/index").then(function (response) {
 					$scope.names = response.data.records;
+					console.log(response);
+					//console.log(response.data.records);
+					//console.log(response.data._debug);
 				});
 
 				$scope.theTime = new Date().toLocaleTimeString();
@@ -53,6 +56,7 @@
 				if (answerForm.$valid) {
 					$http.post("/update", answer).then(function (response) {
 						$scope.response = response.data;
+						console.log(response.data);
 						$scope.answer.message = '';
 					});						
 				}
@@ -123,10 +127,10 @@
 						<th>Объявление</th>
 					</tr>
 					<tr ng-repeat="x in names">
-						<td> @{{ x.Id }}</td>
-						<td> @{{ x.Remote_addr }}</td>
-						<td> @{{ x.Date }}</td>
-						<td> <span class="font-weight">@{{ x.Name }}</span></td>
+						<td> @{{ x.id }}</td>
+						<td> @{{ x.remote_addr }}</td>
+						<td> @{{ x.create_at }}</td>
+						<td> <span class="font-weight">@{{ x.name }}</span></td>
 
 					</tr>
 				</table>
